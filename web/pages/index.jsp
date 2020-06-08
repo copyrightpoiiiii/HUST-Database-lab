@@ -102,22 +102,13 @@
                             <input type="password" class="form-control" id="password" placeholder="password" required="required">
                         </div>
                     </div>
-                    <!--记住密码-->
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 记住密码
-                                </label>
-                            </div>
-                        </div>
-                    </div>
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">登录</button>
+                            <button type="submit" class="btn btn-default" onclick="judge()">登录</button>
                         </div>
                     </div>
+                    <span class="res" id="loginfo"></span>
                 </form>
             </div>
         </div>
@@ -153,22 +144,19 @@
                             <input type="password" class="form-control" id="regpassword" placeholder="password" required="required">
                         </div>
                     </div>
-                    <!--记住密码-->
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 记住密码
-                                </label>
-                            </div>
+                        <label for="username" class="col-sm-2 control-label" >手机号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="regphone" placeholder="phonenum" required="required">
                         </div>
                     </div>
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">注册</button>
+                            <button type="submit" class="btn btn-default" onclick="userReg()">注册</button>
                         </div>
                     </div>
+                    <span class="res" id="regInfo"></span>
                 </form>
             </div>
         </div>

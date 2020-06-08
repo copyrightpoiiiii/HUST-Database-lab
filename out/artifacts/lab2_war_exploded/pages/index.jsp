@@ -115,9 +115,10 @@
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">登录</button>
+                            <button type="submit" class="btn btn-default" onclick="judge()">登录</button>
                         </div>
                     </div>
+                    <span class="res" id="loginfo"></span>
                 </form>
             </div>
         </div>
@@ -166,9 +167,10 @@
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">注册</button>
+                            <button type="submit" class="btn btn-default" onclick="userReg()">注册</button>
                         </div>
                     </div>
+                    <span class="res" id="regInfo"></span>
                 </form>
             </div>
         </div>

@@ -1,25 +1,5 @@
 type = "text/javascript";
-
-function login() {
-    var popbox = document.getElementById("pbx1");
-    var poplayer = document.getElementById("poplayer");
-    poplayer.style.display = "block";
-    popbox.style.display = "block";
-}
-
-function reg() {
-    var popbox = document.getElementById("pbx2");
-    var poplayer = document.getElementById("poplayer");
-    poplayer.style.display = "block";
-    popbox.style.display = "block";
-}
-
-function closebox(obj) {
-    var poplayer = document.getElementById("poplayer");
-    poplayer.style.display = "none";
-    obj.parentElement.style.display = "none";
-}
-
+/*
 function strlen(str) {
     var len = 0;
     for (var i = 0; i < str.length; i++) {
@@ -38,7 +18,7 @@ function judge() {
     var $username = $("#username").val();
     var nameLen = strlen($username);
     $username = encodeURIComponent($username);
-    var $password = $("#passwd").val();
+    var $password = $("#password").val();
     $password = encodeURIComponent($password);
     var pwdLen = strlen($password);
     if (nameLen <= 10 && pwdLen <= 10) {
@@ -72,17 +52,12 @@ function judge() {
 }
 
 function userReg() {
-    var $username = $("#regname").val();
+    var $username = $("#regusername").val();
     var nemLen = strlen($username);
     $username = encodeURIComponent($username);
-    var $pwd1 = $("#pw1").val();
-    var $pwd2 = $("#pw2").val();
+    var $pwd1 = $("#regpassword").val();
     var pwdLen = strlen($pwd1);
-    var $grade = $("#grade").val();
     $pwd1 = encodeURIComponent($pwd1);
-    $grade = encodeURIComponent($grade);
-    $pwd2 = encodeURIComponent($pwd2);
-    if ($pwd1 == $pwd2) {
         if (nemLen <= 10 && pwdLen <= 10) {
             $.ajax({
                 type: "post",
@@ -111,10 +86,6 @@ function userReg() {
             var nam = "#regInfo";
             $(nam).text("输入过长！");
         }
-    } else {
-        var nam = "#regInfo";
-        $(nam).text("两次密码输入不一致!");
-    }
 }
-
+*/
 
