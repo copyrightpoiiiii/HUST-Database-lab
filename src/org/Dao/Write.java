@@ -2,11 +2,11 @@ package org.Dao;
 
 import java.sql.*;
 
-public class Query {
+public class Write {
     String drv = "com.mysql.cj.jdbc.Driver";
     String url = "jdbc:mysql://localhost:3306/lab2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    String usr = "query";
-    String pwd = "query";
+    String usr = "write";
+    String pwd = "write";
     Connection connect;
 
     public boolean getConnect() {
@@ -20,28 +20,36 @@ public class Query {
         return true;
     }
 
-    public int LogIn(String id, String password) {
+    public int SignIn(String id, String password, String phone) {
         /*
          * 传入用户的id，password和grade
          * 如果没有重复id，则注册成功
          * 返回true时表示注册成功，false表示用户名已存在
          */
-        int userType = -1;
+        int existance = 0;
         if (!getConnect())return -2;
         try {
-            CallableStatement cstmt = connect.prepareCall("{call logIn()}");
+            CallableStatement cstmt = connect.prepareCall("{call findUser(?)}");
+            cstmt.setString(1,id);
             ResultSet rs = cstmt.executeQuery();
             //ResultSetMetaData rsmd = rs.getMetaData();
             //int numColumns=rsmd.getColumnCount();
-            while(rs.next()){
-                userType = rs.getInt(1);
+            if(!rs.next()){
+                cstmt=connect.prepareCall("{call signIn(?,?,?)}");
+                cstmt.setString(1,id);
+                cstmt.setString(2,password);
+                cstmt.setString(3,phone);
+                cstmt.executeQuery();
+                existance=1;
             }
             rs.close();
             cstmt.close();
             connect.close();
         } catch (Exception e) {
             e.printStackTrace();
+            existance = -3;
         }
-        return userType;
+        return existance;
     }
 }
+

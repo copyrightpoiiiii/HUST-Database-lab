@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <script src="../js/index.js"></script>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
@@ -102,23 +103,18 @@
                             <input type="password" class="form-control" id="password" placeholder="password" required="required">
                         </div>
                     </div>
-                    <!--记住密码-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 记住密码
-                                </label>
-                            </div>
+                            <span class="form-group" id="logInfo"></span>
                         </div>
                     </div>
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" onclick="judge()">登录</button>
+                            <button type="button" class="btn btn-default" onclick="judge()">登录</button>
                         </div>
                     </div>
-                    <span class="res" id="loginfo"></span>
+
                 </form>
             </div>
         </div>
@@ -154,20 +150,16 @@
                             <input type="password" class="form-control" id="regpassword" placeholder="password" required="required">
                         </div>
                     </div>
-                    <!--记住密码-->
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 记住密码
-                                </label>
-                            </div>
+                        <label for="username" class="col-sm-2 control-label" >手机号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="regphone" placeholder="phonenum" required="required">
                         </div>
                     </div>
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" onclick="userReg()">注册</button>
+                            <button type="button" class="btn btn-default" onclick="userReg()">注册</button>
                         </div>
                     </div>
                     <span class="res" id="regInfo"></span>

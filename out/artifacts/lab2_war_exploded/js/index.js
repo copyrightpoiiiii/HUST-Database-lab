@@ -1,5 +1,5 @@
 type = "text/javascript";
-/*
+
 function strlen(str) {
     var len = 0;
     for (var i = 0; i < str.length; i++) {
@@ -30,12 +30,17 @@ function judge() {
             data:
                 "uname=" + $username + "&upwd=" + $password,
             success: function (re_data) {
-                var nam = "#loginfo";
-                if (re_data == "true") {
+                var nam = "#logInfo";
+                alert(re_data);
+                if (re_data === "2" || re_data ==="1") {
                     $(nam).text("登录成功");
-                    window.location.replace("check.jsp" + "?username=" + $username);
-                } else {
+                    if(re_data === "2")
+                        window.location.replace("userquery.jsp" + "?username=" + $username);
+                    else window.location.replace("adminManager.jsp" + "?username=" + $username);
+                } else if(re_data === "-1"){
                     $(nam).text("用户名或密码错误!");
+                } else{
+                    $(nam).text("系统故障!");
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -46,7 +51,7 @@ function judge() {
             }
         });
     } else {
-        var nam = "#loginfo";
+        var nam = "#logInfo";
         $(nam).text("输入过长!");
     }
 }
@@ -58,6 +63,8 @@ function userReg() {
     var $pwd1 = $("#regpassword").val();
     var pwdLen = strlen($pwd1);
     $pwd1 = encodeURIComponent($pwd1);
+    var $phone = $("#regphone").val();
+    $phone = encodeURIComponent($phone);
         if (nemLen <= 10 && pwdLen <= 10) {
             $.ajax({
                 type: "post",
@@ -65,12 +72,13 @@ function userReg() {
                 url: "../RegServlet",
                 //contentType:"utf-8",
                 data:
-                    "regname=" + $username + "&grade=" + $grade + "&upw=" + $pwd1,
+                    "regname=" + $username + "&phone=" + $phone + "&upw=" + $pwd1,
                 success: function (re_data) {
                     var nam = "#regInfo";
-                    if (re_data == "true") {
+                    alert(re_data);
+                    if (re_data === "true") {
                         $(nam).text("注册成功");
-                        window.location.replace("check.jsp" + "?username=" + $username);
+                        window.location.replace("userquery.jsp" + "?username=" + $username);
                     } else {
                         $(nam).text("用户名已被使用!");
                     }
@@ -87,5 +95,4 @@ function userReg() {
             $(nam).text("输入过长！");
         }
 }
-*/
 
