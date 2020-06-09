@@ -66,7 +66,7 @@
                     5.线上支付
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large" href="#">开始体验</a>
+                    <a class="btn btn-primary btn-large" href="userquery.jsp">开始体验</a>
                 </p>
             </div>
         </div>

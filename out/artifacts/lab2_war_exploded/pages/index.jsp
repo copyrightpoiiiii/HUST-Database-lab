@@ -66,7 +66,7 @@
                     5.线上支付
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large" href="#">开始体验</a>
+                    <a class="btn btn-primary btn-large" href="userquery.jsp">开始体验</a>
                 </p>
             </div>
         </div>
@@ -156,13 +156,17 @@
                             <input type="text" class="form-control" id="regphone" placeholder="phonenum" required="required">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <span class="form-group" id="regInfo"></span>
+                        </div>
+                    </div>
                     <!--登陆按钮-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="button" class="btn btn-default" onclick="userReg()">注册</button>
                         </div>
                     </div>
-                    <span class="res" id="regInfo"></span>
                 </form>
             </div>
         </div>

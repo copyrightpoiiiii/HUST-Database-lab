@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <script src="../js/userquery.js"></script>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
@@ -38,6 +39,11 @@
                                 新朋友！
                             </button>
                         </li>
+                        <li class="active">
+                            <button type="submit" class="btn btn-link btn-lg" data-toggle="modal" href="userinfo.jsp" >
+                                个人信息
+                            </button>
+                        </li>
                         </li>
                     </ul>
                 </div>
@@ -61,11 +67,6 @@
                                             <option Value="0">sport car</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-
-                                        <select ID="ddlshi" class="form-control">
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +88,17 @@
                         <div class="col-lg-4 col-sm-8 col-xs-8 col-xxs-12">
                             <div class="form-horizontal">
                                 <div class="form-group">
+                                    <div class="col-md-4 control-label" for="select">乘坐人数</div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" runat="server" id="travelNum"
+                                               name="travelNum" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-8 col-xxs-12">
+                            <div class="form-horizontal">
+                                <div class="form-group">
                                     <div class="col-md-4 control-label">出发地</div>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" runat="server" id="keyword"
@@ -94,7 +106,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <input type="button" ID="btnSearch" value=" 查 询 "
-                                               class="btn btn-success col-md-12 " />
+                                               class="btn btn-success col-md-12 " onclick="query()"/>
                                     </div>
                                 </div>
                             </div>
@@ -107,56 +119,35 @@
         </div>
     </div>
     <div class="col-md-12 column">
+        <%
+            for(int i = 0; i < 4 ; i++){
+        %>
         <div class="row">
+            <%
+                for(int j = 0; j < 3 ; j ++){
+            %>
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img alt="300x200" src="v3/default4.jpg" />
-                    <div class="caption">
-                        <h3>
+                <div class="thumbnail" id = "thu<%=i*3+j%>" style="display: none">
+                    <div class="caption" id = "car<%=i*3+j%>" >
+                        <h3 id="hcar<%=i*3+j%>">
                             Thumbnail label
                         </h3>
-                        <p>
+                        <p id="pcar<%=i*3+j%>">
                             Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
                         </p>
                         <p>
-                            <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                            <a class="btn" href="#" >预定</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img alt="300x200" src="v3/default5.jpg" />
-                    <div class="caption">
-                        <h3>
-                            Thumbnail label
-                        </h3>
-                        <p>
-                            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                        </p>
-                        <p>
-                            <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img alt="300x200" src="v3/default6.jpg" />
-                    <div class="caption">
-                        <h3>
-                            Thumbnail label
-                        </h3>
-                        <p>
-                            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                        </p>
-                        <p>
-                            <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <%
+                }
+            %>
         </div>
+        <%
+            }
+        %>
         <ul class="pagination">
             <li>
                 <a href="#">Prev</a>

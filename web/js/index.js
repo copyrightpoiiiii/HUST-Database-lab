@@ -75,10 +75,11 @@ function userReg() {
                     "regname=" + $username + "&phone=" + $phone + "&upw=" + $pwd1,
                 success: function (re_data) {
                     var nam = "#regInfo";
-                    if (re_data === "true") {
+                    if (re_data == "true") {
                         $(nam).text("注册成功");
                         window.location.replace("userquery.jsp" + "?username=" + $username);
                     } else {
+                        alert(re_data);
                         $(nam).text("用户名已被使用!");
                     }
                 },

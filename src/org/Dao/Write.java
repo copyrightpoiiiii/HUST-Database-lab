@@ -40,7 +40,7 @@ public class Write {
                 cstmt.setString(2,password);
                 cstmt.setString(3,phone);
                 cstmt.executeQuery();
-                existance=1;
+                existance = 1;
             }
             rs.close();
             cstmt.close();
