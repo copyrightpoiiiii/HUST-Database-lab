@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="org.Dao.Query" %>
+<%@ page import="org.Dao.Writer" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="net.sf.json.JSONObject" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +13,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <script src="../js/userinfo.js"></script>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-
 </head>
 <body>
+<%
+    request.setCharacterEncoding("utf-8");
+    String username = request.getParameter("username");
+    Query queryInfo = new Query();
+    ArrayList<Integer> info = queryInfo.queryInfo(username);
+    ArrayList<String> apply = queryInfo.queryUserApply(username);
+%>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -60,20 +71,20 @@
                     <div class="tab-pane active" id="panel-244526">
                         <p>
                             <br>
-                            会员状态 :
+                            会员状态 :<%=info.get(2)%>
                             <br>
                             <br>
-                            信用状态 :
+                            信用状态 :<%=info.get(0)%>
                             <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="panel-613897">
                              <br>
-                            余额 :
+                            余额 :<%=info.get(1)%>
                              <br>
                              <br>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#log" >
-                                充值
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#log" onclick="add(<%=username%>)">
+                                打发点喽(100元起)
                             </button>
                         </p>
                     </div>
@@ -100,25 +111,29 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <%
+                                    for(int i =0 ;i<apply.size()/5;i++){
+                                %>
+                                <thead>
                                 <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        TB - Monthly
-                                    </td>
-                                    <td>
-                                        01/04/2012
-                                    </td>
-                                    <td>
-                                        01/04/2012
-                                    </td>
-                                    <td>
-                                        Default
-                                    </td>
+                                    <th>
+                                        <%=apply.get(i*5)%>
+                                    </th>
+                                    <th>
+                                        <%=apply.get(i*5+1)%>
+                                    </th>
+                                    <th>
+                                        <%=apply.get(i*5+2)%>
+                                    </th>
+                                    <th>
+                                        <%=apply.get(i*5+3)%>
+                                    </th>
+                                    <th>
+                                        <%=apply.get(i*5+4)%>
+                                    </th>
                                 </tr>
-                                </tbody>
+                                </thead>
+                                <% } %>
                             </table>
                         </div>
                         </p>

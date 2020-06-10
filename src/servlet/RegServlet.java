@@ -1,7 +1,6 @@
 package servlet;
 
-
-import org.Dao.Write;
+import org.Dao.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class RegServlet extends HttpServlet {
         String name = request.getParameter("regname");
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("upw");
-        Write new_user = new Write();
+        Writer new_user = new Writer();
         int result = new_user.SignIn(name, pwd, phone);
         PrintWriter out = response.getWriter();
         if (result == 1) {

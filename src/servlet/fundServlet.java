@@ -1,6 +1,6 @@
 package servlet;
 
-import org.Dao.Query;
+import org.Dao.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +13,14 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/fundServlet")
+public class fundServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public fundServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +31,15 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        String name = request.getParameter("uname");
-        String pwd = request.getParameter("upwd");
-        Query login = new Query();
-        int result = login.LogIn(name, pwd);
+        String id = request.getParameter("username");
+        Writer new_user = new Writer();
+        int result = new_user.addfund(id);
         PrintWriter out = response.getWriter();
-        out.write(result+"");
+        if (result == 1) {
+            out.write("true");
+        } else {
+            out.write(result+"");
+        }
         out.close();
     }
 

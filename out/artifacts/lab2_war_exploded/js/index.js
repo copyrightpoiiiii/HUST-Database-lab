@@ -31,7 +31,6 @@ function judge() {
                 "uname=" + $username + "&upwd=" + $password,
             success: function (re_data) {
                 var nam = "#logInfo";
-                alert(re_data);
                 if (re_data === "2" || re_data ==="1") {
                     $(nam).text("登录成功");
                     if(re_data === "2")
@@ -79,7 +78,6 @@ function userReg() {
                         $(nam).text("注册成功");
                         window.location.replace("userquery.jsp" + "?username=" + $username);
                     } else {
-                        alert(re_data);
                         $(nam).text("用户名已被使用!");
                     }
                 },
