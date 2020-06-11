@@ -135,4 +135,55 @@ public class Query {
         }
         return array;
     }
+
+    public ArrayList<JSONObject>  queryApply(){
+        if (!getConnect())return new ArrayList<JSONObject>();
+        ArrayList<JSONObject> array = new ArrayList<JSONObject>();
+        try {
+            CallableStatement cstmt = connect.prepareCall("{call queryApply()}");
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                JSONObject bean = new JSONObject();
+                bean.put("id",rs.getInt("applyRecord.id"));
+                bean.put("username",rs.getString("username"));
+                bean.put("credit",rs.getInt("credit"));
+                bean.put("phone",rs.getString("phone"));
+                bean.put("ssCity",rs.getString("ssCity"));
+                array.add(bean);
+            }
+            rs.close();
+            cstmt.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return array;
+    }
+
+    public ArrayList<JSONObject>  queryCarInfo(){
+        if (!getConnect())return new ArrayList<JSONObject>();
+        ArrayList<JSONObject> array = new ArrayList<JSONObject>();
+        try {
+            CallableStatement cstmt = connect.prepareCall("{call queryCarState()}");
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                JSONObject bean = new JSONObject();
+                bean.put("id",rs.getInt("id"));
+                bean.put("state",rs.getInt("useState"));
+                bean.put("useTime",rs.getInt("useTime"));
+                bean.put("useDis",rs.getInt("useDis"));
+                bean.put("upkeepDate",rs.getDate("upkeepDate"));
+                bean.put("City",rs.getString("City"));
+                array.add(bean);
+            }
+            rs.close();
+            cstmt.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return array;
+    }
+
+
 }

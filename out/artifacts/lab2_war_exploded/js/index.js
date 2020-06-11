@@ -31,9 +31,9 @@ function judge() {
                 "uname=" + $username + "&upwd=" + $password,
             success: function (re_data) {
                 var nam = "#logInfo";
-                if (re_data === "2" || re_data ==="1") {
+                if (re_data == "2" || re_data =="1") {
                     $(nam).text("登录成功");
-                    if(re_data === "2")
+                    if(re_data == "2")
                         window.location.replace("userquery.jsp" + "?username=" + $username);
                     else window.location.replace("adminManager.jsp" + "?username=" + $username);
                 } else if(re_data === "-1"){

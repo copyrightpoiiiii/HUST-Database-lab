@@ -45,7 +45,30 @@
 
             </nav>
 
-            <table id = "table" class = "table table-bordered tab-content" ></table>
+            <table id = "table" class = "table table-bordered tab-content" >
+                <thead>
+                <tr>
+                    <th>
+                        申请编号
+                    </th>
+                    <th>
+                        用户名称
+                    </th>
+                    <th>
+                        信用度
+                    </th>
+                    <th>
+                        手机号
+                    </th>
+                    <th>
+                        申请时间
+                    </th>
+                    <th>
+                        地址
+                    </th>
+                </tr>
+                </thead>
+            </table>
 
         </div>
     </div>

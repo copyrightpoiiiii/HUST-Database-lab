@@ -2,17 +2,78 @@ type = "text/javascript";
 
 function addFunctionAlty(value, row, index) {
     return [
-        '<button id="bind" type="button" class="btn btn-default">绑定</button>',
-        '<button id="unbind" type="button" class="btn btn-default">解绑</button>',
+        '<button id="bind" type="button" class="btn btn-default">通过</button>',
+        '<button id="unbind" type="button" class="btn btn-default">拒绝</button>',
+        '<button id="ret" type="button" class="btn btn-default">还车</button>',
     ].join('');
 }
 window.operateEvents = {
     'click #bind': function (e, value, row, index) {
-        alert(row.qxxh);
-        $("#upload").modal('show');
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":2,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
     }, 'click #unbind': function (e, value, row, index) {
-        alert(row.qxxh);
-        $("#upload").modal('show');
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":3,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
+    },'click #ret': function (e, value, row, index) {
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":3,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
     }
 };
 
@@ -28,8 +89,8 @@ $(document).ready(function() {
         singleSelect: true, // 单选checkbox
         clickToSelect: true,
         uniqueId: 'id',
-        method: 'get',
-        url: '/sys/netbar/manage/list/data',
+        method: 'post',
+        url: '../getApplyServelet',
         dataType: 'json',
         sidePagination: 'server',
         toolbar: '#toolbar',
@@ -42,11 +103,15 @@ $(document).ready(function() {
                 areaCode: $("#areaCode").val()
             };
             return params;
+
         },
+        /*responseHandler: function(res){
+            return res.attributes.Unit;
+        },*/
         columns: [{
             checkbox: true
         }, {
-            field: 'applyNo',
+            field: 'id',
             title: '申请编号',
         }, {
             field: 'username',
@@ -58,10 +123,7 @@ $(document).ready(function() {
             field: 'phone',
             title: '手机号',
         }, {
-            field: 'applyTimeStr',
-            title: '申请时间',
-        }, {
-            field: 'address',
+            field: 'ssCity',
             title: '地址',
         }, {
             field: 'operate',

@@ -2,17 +2,55 @@ type = "text/javascript";
 
 function addFunctionAlty(value, row, index) {
     return [
-        '<button id="bind" type="button" class="btn btn-default">绑定</button>',
-        '<button id="unbind" type="button" class="btn btn-default">解绑</button>',
+        '<button id="bind" type="button" class="btn btn-default">保养</button>',
+        '<button id="unbind" type="button" class="btn btn-default">开始使用</button>',
     ].join('');
 }
 window.operateEvents = {
     'click #bind': function (e, value, row, index) {
-        alert(row.qxxh);
-        $("#upload").modal('show');
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeCarServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":2,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
     }, 'click #unbind': function (e, value, row, index) {
-        alert(row.qxxh);
-        $("#upload").modal('show');
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeCarServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":0,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
     }
 };
 
@@ -28,8 +66,8 @@ $(document).ready(function() {
         singleSelect: true, // 单选checkbox
         clickToSelect: true,
         uniqueId: 'id',
-        method: 'get',
-        url: '/sys/netbar/manage/list/data',
+        method: 'post',
+        url: '../getCarServlet',
         dataType: 'json',
         sidePagination: 'server',
         toolbar: '#toolbar',
@@ -46,7 +84,7 @@ $(document).ready(function() {
         columns: [{
             checkbox: true
         }, {
-            field: 'carNo',
+            field: 'id',
             title: '车辆编号',
         }, {
             field: 'useTime',
@@ -55,11 +93,14 @@ $(document).ready(function() {
             field: 'useDis',
             title: '行驶距离',
         }, {
-            field: 'lastTime',
+            field: 'upkeepDate',
             title: '上次维修时间',
         }, {
-            field: 'address',
+            field: 'City',
             title: '地址',
+        }, {
+            field: 'state',
+            title: '状态',
         }, {
             field: 'operate',
             title: '操作',
