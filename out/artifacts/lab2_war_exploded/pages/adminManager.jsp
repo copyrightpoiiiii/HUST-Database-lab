@@ -21,8 +21,7 @@
 <%
     String name = request.getParameter("username");
 %>
-<h1 id="username" style="display: none" text=<%=name%> >
-</h1>
+<h1 id="username" style="display: none" ><%=name%></h1>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -42,6 +41,20 @@
                         <li class="active">
                             <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#reg" >
                                 新朋友！
+                            </button>
+                        </li>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="tableMake(<%=name%>)" >
+                                查看报表
+                            </button>
+                        </li>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="carMan(<%=name%>)" >
+                                管理车辆
                             </button>
                         </li>
                         </li>
@@ -72,7 +85,7 @@
                                             <option Value="2">擦碰</option>
                                         </select>
                                     </div>
-                                        <div class="col-md-4 control-label" for="select">赔偿金额</div>
+                                        <div class="col-md-4 control-label" for="select">罚款金额</div>
                                             <div class="col-md-4 control-label">
                                             <input type="text" class="form-control" runat="server" id="Balance_start"
                                                    name="Balance_start" />

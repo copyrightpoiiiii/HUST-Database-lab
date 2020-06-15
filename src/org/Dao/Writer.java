@@ -113,6 +113,7 @@ public class Writer {
             CallableStatement cstmt = connect.prepareCall("{call submitApply(?,?,?)}");
             cstmt.setInt(1,id);
             cstmt.setInt(2,sta);
+            cstmt.setInt(3,userid);
             cstmt.executeQuery();
             existance=1;
             cstmt.close();
@@ -160,6 +161,29 @@ public class Writer {
             cstmt.setInt(1,id);
             cstmt.setInt(2,Ctype);
             cstmt.setInt(3,money);
+            cstmt.executeQuery();
+            existance=1;
+            cstmt.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            existance = -3;
+        }
+        return existance;
+    }
+
+    public int keepWrite (Integer id,Integer money) {
+        /*
+         * 传入用户的id，password和grade
+         * 如果没有重复id，则注册成功
+         * 返回true时表示注册成功，false表示用户名已存在
+         */
+        int existance = 0;
+        if (!getConnect())return -2;
+        try {
+            CallableStatement cstmt = connect.prepareCall("{call insertKeep(?,?)}");
+            cstmt.setInt(1,id);
+            cstmt.setInt(2,money);
             cstmt.executeQuery();
             existance=1;
             cstmt.close();

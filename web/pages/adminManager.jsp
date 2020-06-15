@@ -21,8 +21,7 @@
 <%
     String name = request.getParameter("username");
 %>
-<h1 id="username" style="display: none" text=<%=name%> >
-</h1>
+<h1 id="username" style="display: none" ><%=name%></h1>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -86,7 +85,7 @@
                                             <option Value="2">擦碰</option>
                                         </select>
                                     </div>
-                                        <div class="col-md-4 control-label" for="select">赔偿金额</div>
+                                        <div class="col-md-4 control-label" for="select">罚款金额</div>
                                             <div class="col-md-4 control-label">
                                             <input type="text" class="form-control" runat="server" id="Balance_start"
                                                    name="Balance_start" />

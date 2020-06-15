@@ -10,7 +10,7 @@ function addFunctionAlty(value, row, index) {
 }
 window.operateEvents = {
     'click #bind': function (e, value, row, index) {
-        var $username = $("#username").val();
+        var $username = document.getElementById("username").innerHTML;
         $.ajax({
             type: "post",
             async: false,
@@ -18,7 +18,7 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":3,
+                "state":"3",
                 "userid":$username,
             },
             success: function (re_data) {
@@ -34,7 +34,7 @@ window.operateEvents = {
             }
         });
     }, 'click #unbind': function (e, value, row, index) {
-        var $username = $("#username").val();
+        var $username = document.getElementById("username").innerHTML;
         $.ajax({
             type: "post",
             async: false,
@@ -42,7 +42,7 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":2,
+                "state":"2",
                 "userid":$username,
             },
             success: function (re_data) {
@@ -58,7 +58,7 @@ window.operateEvents = {
             }
         });
     },'click #ret': function (e, value, row, index) {
-        var $username = $("#username").val();
+        var $username = document.getElementById("username").innerHTML;
         $.ajax({
             type: "post",
             async: false,
@@ -66,7 +66,7 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":4,
+                "state":"4",
                 "userid":$username,
             },
             success: function (re_data) {
@@ -82,7 +82,7 @@ window.operateEvents = {
             }
         });
     },'click #crash': function (e, value, row, index) {
-        var $username = $("#username").val();
+        var $username = document.getElementById("username").innerHTML;
         $.ajax({
             type: "post",
             async: false,
@@ -90,7 +90,7 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":5,
+                "state":"5",
                 "userid":$username,
             },
             success: function (re_data) {
@@ -105,7 +105,7 @@ window.operateEvents = {
                 //alert("啊哦，出错了QAQ");
             }
         });
-    }
+    },
 };
 
 $(document).ready(function() {

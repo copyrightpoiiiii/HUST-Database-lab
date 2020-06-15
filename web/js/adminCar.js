@@ -15,7 +15,7 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":2,
+                "state":1,
             },
             success: function (re_data) {
                 if (re_data =="true") {
@@ -118,4 +118,33 @@ function tableMake(username) {
 function appMan(username) {
     $username = encodeURIComponent(username);
     window.location.replace("adminManager.jsp"+"?username="+$username);
+}
+
+function update() {
+    var $id = $("#Balance_end").val();
+    var $money = $("#Balance_start").val();
+    $.ajax({
+        type: "post",
+        async: true,
+        url: "../keepServlet",
+        //contentType:"utf-8",
+        data: {
+            "id":$id,
+            "money":$money
+        },
+        success: function (msg) {
+            if (msg == "true") {
+                alert("修改成功");
+            } else {
+                alert("修改失败");
+            }
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+            // 状态
+            // 错误信息
+            //alert("啊哦，出错了QAQ");
+        }
+    });
 }

@@ -17,6 +17,9 @@
     <script src="../js/Table.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<%
+    String name = request.getParameter("username");
+%>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -37,11 +40,6 @@
                         <li class="active">
                             <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#reg" >
                                 新朋友！
-                            </button>
-                        </li>
-                        <li class="active">
-                            <button type="submit" class="btn btn-link btn-lg" data-toggle="modal" href="userinfo.jsp" >
-                                个人信息
                             </button>
                         </li>
                         </li>
@@ -73,15 +71,18 @@
 
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <form role="form" action="Table.jsp" method="post">
+                    <form action="Table.jsp?username=<%=name%>>" method="post">
                         <div class="form-group">
-                            <label for="dateStart">起始日期</label><input type="date" class="form-control" id="dateStart" />
+                            <label for="dateStart">起始日期</label>
+                            <input type="text" class="form-control" id="dateStart" name="dateStart"/>
                         </div>
                         <div class="form-group">
-                            <label for="dateEnd">结束日期</label><input type="date" class="form-control" id="dateEnd" />
+                            <label for="dateEnd">结束日期</label>
+                            <input type="text" class="form-control" id="dateEnd" name="dateEnd"/>
                         </div>
                         <div class="checkbox">
-                        </div> <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
             </div>

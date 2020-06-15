@@ -15,7 +15,7 @@ function strlen(str) {
 }
 
 function query() {
-    var $carType = $("#ddlsheng").val()+1;
+    var $carType = parseInt($("#ddlsheng").val(),10)+1;
     //$carType = encodeURIComponent($carType);
     var $cashStart = $("#Balance_start").val();
     //$cashStart = encodeURIComponent($cashStart);
@@ -51,6 +51,10 @@ function query() {
                     var nam3 = document.getElementById("lab"+i);
                     nam3.innerText = msg[i].id;
                 }
+                for (var i = msg.length ;i < 13 ;i++){
+                    var popbox = document.getElementById("thu"+i);
+                    popbox.style.display = 'none';
+                }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
@@ -75,7 +79,6 @@ function book(e,name) {
             "username":name,
         },
         success: function (re_data) {
-            alert(re_data);
             if (re_data =="true") {
                 alert("预定成功")
             } else alert("预定失败");

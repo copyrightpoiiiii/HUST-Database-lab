@@ -62,6 +62,35 @@
 
             </nav>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 条件查找
+                </div>
+                <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-4 col-sm-8 col-xs-8 col-xxs-12">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-4 control-label" for="select">车辆编号</div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" runat="server" id="Balance_end"
+                                       name="Balance_end" />
+                            </div>
+                        <div class="col-md-4 control-label" for="select">保养/维修金额</div>
+                        <div class="col-md-4 control-label">
+                            <input type="text" class="form-control" runat="server" id="Balance_start"
+                                   name="Balance_start" />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="button" ID="btnSearch" value=" 上传 "
+                                   class="btn btn-success col-md-12 " onclick="update()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
             <table id = "table" class = "table table-bordered tab-content" ></table>
 
         </div>

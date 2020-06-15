@@ -43,7 +43,7 @@
                             </button>
                         </li>
                         <li class="active">
-                            <button type="submit" class="btn btn-link btn-lg" data-toggle="modal" href="userinfo.jsp" >
+                            <button type="submit" class="btn btn-link btn-lg" data-toggle="modal" onclick="turn(<%=name%>)" >
                                 个人信息
                             </button>
                         </li>

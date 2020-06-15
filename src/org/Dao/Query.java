@@ -190,10 +190,23 @@ public class Query {
             while(rs.next()){
                 JSONObject bean = new JSONObject();
                 bean.put("id",rs.getInt("id"));
-                bean.put("state",rs.getInt("useState"));
+                Integer sta = rs.getInt("useState");
+                if(sta == 1)
+                    bean.put("state","保养中");
+                else if (sta == 2)
+                    bean.put("state","预定中");
+                else if (sta == 4)
+                    bean.put("state","待维修");
+                else if (sta == 0)
+                    bean.put("state","空闲中");
+                else if (sta == 3)
+                    bean.put("state","使用中");
                 bean.put("useTime",rs.getInt("useTime"));
                 bean.put("useDis",rs.getInt("useDis"));
-                bean.put("upkeepDate",rs.getDate("upkeepDate"));
+                Date dat = rs.getDate("upkeepDate");
+                if(dat != null)
+                    bean.put("upkeepDate",dat.toString());
+                else bean.put("upkeepDate","尚未保养");
                 bean.put("City",rs.getString("City"));
                 array.add(bean);
             }
@@ -206,5 +219,33 @@ public class Query {
         return array;
     }
 
+    public ArrayList<String>   makeTable(Date startDate,Date endDate){
+        if (!getConnect())return new ArrayList<String>();
+        ArrayList<String> array = new ArrayList<String>();
+        try {
+            CallableStatement cstmt = connect.prepareCall("{call makeTable(?,?,?,?,?,?,?,?,?,?,?)}");
+            cstmt.setDate(1, new java.sql.Date(startDate.getTime()));
+            cstmt.setDate(2, new java.sql.Date(endDate.getTime()));
+            cstmt.registerOutParameter(3,Types.INTEGER);
+            cstmt.registerOutParameter(4,Types.INTEGER);
+            cstmt.registerOutParameter(5,Types.INTEGER);
+            cstmt.registerOutParameter(6,Types.INTEGER);
+            cstmt.registerOutParameter(7,Types.INTEGER);
+            cstmt.registerOutParameter(8,Types.INTEGER);
+            cstmt.registerOutParameter(9,Types.INTEGER);
+            cstmt.registerOutParameter(10,Types.INTEGER);
+            cstmt.registerOutParameter(11,Types.INTEGER);
+            cstmt.executeQuery();
+            for(int i=3;i<=11;i++) {
+                System.out.println(cstmt.getInt(i));
+                array.add(cstmt.getInt(i) + "");
+            }
+            cstmt.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return array;
+    }
 
 }

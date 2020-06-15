@@ -1,3 +1,8 @@
+<%@ page import="org.Dao.Query" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.DateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -21,6 +26,11 @@
 <%
     String startDate = request.getParameter("dateStart");
     String endDate = request.getParameter("dateEnd");
+    String name = request.getParameter("username");
+    DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Query qu = new Query();
+    Date d1 = sdf.parse(startDate),d2 = sdf.parse(endDate);
+    ArrayList<String> ans = qu.makeTable(d1,d2);
 %>
 <div class="container">
     <div class="row clearfix">
@@ -46,8 +56,8 @@
                         </li>
                         <li>
                         <li class="active">
-                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="tableMake(<%=name%>)" >
-                                查看报表
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="carMan(<%=name%>)" >
+                                管理车辆
                             </button>
                         </li>
                         </li>
@@ -58,17 +68,11 @@
                             </button>
                         </li>
                         </li>
-                        <li>
-                        <li class="active">
-                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="carMan(<%=name%>)" >
-                                管理车辆
-                            </button>
-                        </li>
-                        </li>
                     </ul>
                 </div>
 
             </nav>
+            <h1>^</h1>
             <h1 >
                 <%=startDate%>~<%=endDate%>
             </h1>
@@ -81,41 +85,41 @@
                                 可用车辆
                             </td>
                             <td>
-                                1
+                                <%=ans.get(0)%>
                             </td>
                             <td>
                                 保养车辆
                             </td>
                             <td>
-                               2
+                                <%=ans.get(1)%>
                             </td>
                         </tr>
                         <tr >
+                            <td>
+                                普通用户数量
+                            </td>
+                            <td>
+                                <%=ans.get(2)%>
+                            </td>
                             <td>
                                 vip1数量
                             </td>
                             <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                vip2数量
-                            </td>
-                            <td>
-                                Approved
+                                <%=ans.get(3)%>
                             </td>
                         </tr>
                         <tr >
                             <td>
-                                vip3数量
+                                vip2数量
                             </td>
                             <td>
-                                TB - Monthly
+                                <%=ans.get(4)%>
                             </td>
                             <td>
-                                车辆保养费
+                                保养费用
                             </td>
                             <td>
-                                Declined
+                                <%=ans.get(5)%>
                             </td>
                         </tr>
                         <tr >
@@ -123,13 +127,13 @@
                                 罚款
                             </td>
                             <td>
-                                TB - Monthly
+                                <%=ans.get(6)%>
                             </td>
                             <td>
                                 客户余额
                             </td>
                             <td>
-                                Pending
+                                <%=ans.get(7)%>
                             </td>
                         </tr>
                         <tr >
@@ -137,21 +141,21 @@
                                 总收入
                             </td>
                             <td>
-                                TB - Monthly
+                                <%=ans.get(8)%>
                             </td>
                             <td>
                                 净收入
                             </td>
                             <td>
-                                Call in to confirm
+                                <%=(Integer.valueOf(ans.get(8))-Integer.valueOf(ans.get(5)))%>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+                </div>
             </div>
+    </div>
 </div>
-
-
 </body>
 </html>

@@ -17,14 +17,14 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/changeServlet")
-public class changeServlet extends HttpServlet {
+@WebServlet("/keepServlet")
+public class keepServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public changeServlet() {
+    public keepServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +34,11 @@ public class changeServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        System.out.println(request.getParameter("state"));
-        System.out.println(request.getParameter("id"));
-        System.out.println(request.getParameter("userid"));
-        Integer state = Integer.valueOf(request.getParameter("state"));
+        Integer money = Integer.valueOf(request.getParameter("money"));
         Integer id = Integer.valueOf(request.getParameter("id"));
-        Integer userid = Integer.valueOf(request.getParameter("userid"));
-        //HttpSession session = request.getSession();
-        //System.out.println(take);
-        //System.out.println(carType);
-        //System.out.println(priceBegin);
-        //System.out.println(city);
         Writer queryCar = new Writer();
         //ArrayList<JSONObject> array = queryCar.queryCar(1,1,0,3000,"武汉");
-        int result = queryCar.changeState(id,state,userid);
+        int result = queryCar.keepWrite(id,money);
         PrintWriter out = response.getWriter();
         if (result == 1) {
             out.write("true");

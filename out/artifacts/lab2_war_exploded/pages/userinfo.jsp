@@ -50,6 +50,13 @@
                             </button>
                         </li>
                         </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="turn(<%=username%>)" >
+                                租车
+                            </button>
+                        </li>
+                        </li>
                     </ul>
                 </div>
 
