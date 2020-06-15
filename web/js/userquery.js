@@ -61,20 +61,21 @@ function query() {
         });
 }
 
-function book(e) {
+function book(e,name) {
     var sender = (e && e.target) || (window.event && window.event.srcElement);
     var nam1 = document.getElementById("lab"+sender.id);
     var id = nam1.innerText;
-    alert(id);
     $.ajax({
         type: "post",
         async: true,
         url: "../BookServlet",
         //contentType:"utf-8",
         data: {
-            "id":id
+            "id":id,
+            "username":name,
         },
         success: function (re_data) {
+            alert(re_data);
             if (re_data =="true") {
                 alert("预定成功")
             } else alert("预定失败");
@@ -86,4 +87,9 @@ function book(e) {
             //alert("啊哦，出错了QAQ");
         }
     });
+}
+
+function turn(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("userinfo.jsp" + "?username=" + $username);
 }

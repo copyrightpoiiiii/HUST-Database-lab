@@ -52,7 +52,7 @@ public class Writer {
         return existance;
     }
 
-    public int book (int id) {
+    public int book (int id,String name) {
         /*
          * 传入用户的id，password和grade
          * 如果没有重复id，则注册成功
@@ -61,13 +61,14 @@ public class Writer {
         int existance = 0;
         if (!getConnect())return -2;
         try {
-            CallableStatement cstmt = connect.prepareCall("{call bookCar(?)}");
+            CallableStatement cstmt = connect.prepareCall("{call bookCar(?,?,?)}");
             cstmt.setInt(1,id);
-            ResultSet rs = cstmt.executeQuery();
+            cstmt.setString(2,name);
+            cstmt.registerOutParameter(3,Types.INTEGER);
+            cstmt.executeQuery();
             //ResultSetMetaData rsmd = rs.getMetaData();
             //int numColumns=rsmd.getColumnCount();
-            existance=1;
-            rs.close();
+            existance=cstmt.getInt(3);
             cstmt.close();
             connect.close();
         } catch (Exception e) {
@@ -100,7 +101,7 @@ public class Writer {
         return existance;
     }
 
-    public int changeState (Integer id,Integer sta) {
+    public int changeState (Integer id,Integer sta,Integer userid) {
         /*
          * 传入用户的id，password和grade
          * 如果没有重复id，则注册成功
@@ -109,7 +110,7 @@ public class Writer {
         int existance = 0;
         if (!getConnect())return -2;
         try {
-            CallableStatement cstmt = connect.prepareCall("{call submitApply(?,?)}");
+            CallableStatement cstmt = connect.prepareCall("{call submitApply(?,?,?)}");
             cstmt.setInt(1,id);
             cstmt.setInt(2,sta);
             cstmt.executeQuery();
@@ -135,6 +136,30 @@ public class Writer {
             CallableStatement cstmt = connect.prepareCall("{call changeCarState(?,?)}");
             cstmt.setInt(1,id);
             cstmt.setInt(2,sta);
+            cstmt.executeQuery();
+            existance=1;
+            cstmt.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            existance = -3;
+        }
+        return existance;
+    }
+
+    public int crashWrite (Integer id,Integer Ctype,Integer money) {
+        /*
+         * 传入用户的id，password和grade
+         * 如果没有重复id，则注册成功
+         * 返回true时表示注册成功，false表示用户名已存在
+         */
+        int existance = 0;
+        if (!getConnect())return -2;
+        try {
+            CallableStatement cstmt = connect.prepareCall("{call crashServe(?,?,?)}");
+            cstmt.setInt(1,id);
+            cstmt.setInt(2,Ctype);
+            cstmt.setInt(3,money);
             cstmt.executeQuery();
             existance=1;
             cstmt.close();

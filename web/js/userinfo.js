@@ -21,3 +21,8 @@ function add(username) {
         }
     });
 }
+
+function turn(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("userquery.jsp" + "?username=" + $username);
+}

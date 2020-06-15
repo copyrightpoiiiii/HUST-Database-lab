@@ -18,6 +18,9 @@
     <script src="../js/adminCar.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<%
+    String name = request.getParameter("username");
+%>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -37,6 +40,20 @@
                         <li class="active">
                             <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#reg" >
                                 新朋友！
+                            </button>
+                        </li>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="tableMake(<%=name%>)" >
+                                查看报表
+                            </button>
+                        </li>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="appMan(<%=name%>)" >
+                                管理申请
                             </button>
                         </li>
                         </li>

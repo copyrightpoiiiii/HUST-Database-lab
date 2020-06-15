@@ -109,3 +109,13 @@ $(document).ready(function() {
         }]
     });
 })
+
+function tableMake(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("makeTable.jsp"+"?username="+$username);
+}
+
+function appMan(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("adminManager.jsp"+"?username="+$username);
+}

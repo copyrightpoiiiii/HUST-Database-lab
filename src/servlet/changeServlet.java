@@ -36,6 +36,7 @@ public class changeServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         Integer state = Integer.valueOf(request.getParameter("state"));
         Integer id = Integer.valueOf(request.getParameter("id"));
+        Integer userid = Integer.valueOf(request.getParameter("userid"));
         //HttpSession session = request.getSession();
         //System.out.println(take);
         //System.out.println(carType);
@@ -43,7 +44,7 @@ public class changeServlet extends HttpServlet {
         //System.out.println(city);
         Writer queryCar = new Writer();
         //ArrayList<JSONObject> array = queryCar.queryCar(1,1,0,3000,"武汉");
-        int result = queryCar.changeState(id,state);
+        int result = queryCar.changeState(id,state,userid);
         PrintWriter out = response.getWriter();
         if (result == 1) {
             out.write("true");

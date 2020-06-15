@@ -5,10 +5,12 @@ function addFunctionAlty(value, row, index) {
         '<button id="bind" type="button" class="btn btn-default">通过</button>',
         '<button id="unbind" type="button" class="btn btn-default">拒绝</button>',
         '<button id="ret" type="button" class="btn btn-default">还车</button>',
+        '<button id="crash" type="button" class="btn btn-default">结束申请</button>',
     ].join('');
 }
 window.operateEvents = {
     'click #bind': function (e, value, row, index) {
+        var $username = $("#username").val();
         $.ajax({
             type: "post",
             async: false,
@@ -16,7 +18,8 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":2,
+                "state":3,
+                "userid":$username,
             },
             success: function (re_data) {
                 if (re_data =="true") {
@@ -31,6 +34,7 @@ window.operateEvents = {
             }
         });
     }, 'click #unbind': function (e, value, row, index) {
+        var $username = $("#username").val();
         $.ajax({
             type: "post",
             async: false,
@@ -38,7 +42,8 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":3,
+                "state":2,
+                "userid":$username,
             },
             success: function (re_data) {
                 if (re_data =="true") {
@@ -53,6 +58,7 @@ window.operateEvents = {
             }
         });
     },'click #ret': function (e, value, row, index) {
+        var $username = $("#username").val();
         $.ajax({
             type: "post",
             async: false,
@@ -60,7 +66,32 @@ window.operateEvents = {
             //contentType:"utf-8",
             data: {
                 "id":row.id,
-                "state":3,
+                "state":4,
+                "userid":$username,
+            },
+            success: function (re_data) {
+                if (re_data =="true") {
+                    alert("修改成功")
+                } else alert("修改失败");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+                // 状态
+                // 错误信息
+                //alert("啊哦，出错了QAQ");
+            }
+        });
+    },'click #crash': function (e, value, row, index) {
+        var $username = $("#username").val();
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "../changeServlet",
+            //contentType:"utf-8",
+            data: {
+                "id":row.id,
+                "state":5,
+                "userid":$username,
             },
             success: function (re_data) {
                 if (re_data =="true") {
@@ -126,6 +157,9 @@ $(document).ready(function() {
             field: 'ssCity',
             title: '地址',
         }, {
+            field: 'state',
+            title: '状态',
+        },{
             field: 'operate',
             title: '操作',
             events: operateEvents,//给按钮注册事件
@@ -133,3 +167,44 @@ $(document).ready(function() {
         }]
     });
 })
+
+function query() {
+    var $carType = $("#ddlsheng").val()+1;
+    var $cashStart = $("#Balance_start").val();
+    var $cashEnd = $("#Balance_end").val();
+    $.ajax({
+        type: "post",
+        async: true,
+        url: "../crashServlet",
+        //contentType:"utf-8",
+        data: {
+            "id":$cashEnd,
+            "type":$carType,
+            "money":$cashStart
+        },
+        success: function (msg) {
+            if (msg == "true") {
+                alert("修改成功");
+            } else {
+                alert("修改失败");
+            }
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status + XMLHttpRequest.readyState + textStatus);
+            // 状态
+            // 错误信息
+            //alert("啊哦，出错了QAQ");
+        }
+    });
+}
+
+function tableMake(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("makeTable.jsp"+"?username="+$username);
+}
+
+function carMan(username) {
+    $username = encodeURIComponent(username);
+    window.location.replace("adminCar.jsp"+"?username="+$username);
+}

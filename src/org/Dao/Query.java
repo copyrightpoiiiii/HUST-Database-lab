@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,8 +125,21 @@ public class Query {
                 array.add(rs.getInt("id")+"");
                 array.add(rs.getInt("carID")+"");
                 array.add(rs.getDate("brrowTime").toString());
-                array.add(rs.getDate("receTime").toString());
-                array.add(rs.getInt("state")+"");
+                Date dat = rs.getDate("receTime");
+                if(dat != null)
+                    array.add(rs.getDate("receTime").toString());
+                else array.add("尚未归还");
+                Integer sta = rs.getInt("state");
+                if(sta == 1)
+                    array.add("待审核");
+                else if (sta == 2)
+                    array.add("申请被拒绝");
+                else if (sta == 3)
+                    array.add("申请已通过");
+                else if (sta == 4)
+                    array.add("事故处理");
+                else if (sta == 5)
+                    array.add("事务结束");
             }
             rs.close();
             cstmt.close();
@@ -149,6 +163,13 @@ public class Query {
                 bean.put("credit",rs.getInt("credit"));
                 bean.put("phone",rs.getString("phone"));
                 bean.put("ssCity",rs.getString("ssCity"));
+                Integer sta = rs.getInt("state");
+                if(sta == 1)
+                    bean.put("state","待审核");
+                else if (sta == 3)
+                    bean.put("state","待归还");
+                else if (sta == 4)
+                    bean.put("state","事故处理");
                 array.add(bean);
             }
             rs.close();

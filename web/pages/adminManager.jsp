@@ -18,6 +18,11 @@
     <script src="../js/adminManager.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<%
+    String name = request.getParameter("username");
+%>
+<h1 id="username" style="display: none" text=<%=name%> >
+</h1>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -40,10 +45,65 @@
                             </button>
                         </li>
                         </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="tableMake(<%=name%>)" >
+                                查看报表
+                            </button>
+                        </li>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <button type="button" class="btn btn-link btn-lg" data-toggle="modal" onclick="carMan(<%=name%>)" >
+                                管理车辆
+                            </button>
+                        </li>
+                        </li>
                     </ul>
                 </div>
 
             </nav>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 条件查找
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-8 col-xs-8 col-xxs-12">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                        <div class="col-md-4 control-label" for="select">事务编号</div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" runat="server" id="Balance_end"
+                                                   name="Balance_end" />
+                                        </div>
+                                </div>
+                                    <div class="col-md-4 control-label" for="select">事故类型</div>
+                                        <div class="col-md-4">
+                                        <select ID="ddlsheng" class="form-control">
+                                            <option Value="0">报废</option>
+                                            <option Value="1">损毁</option>
+                                            <option Value="2">擦碰</option>
+                                        </select>
+                                    </div>
+                                        <div class="col-md-4 control-label" for="select">赔偿金额</div>
+                                            <div class="col-md-4 control-label">
+                                            <input type="text" class="form-control" runat="server" id="Balance_start"
+                                                   name="Balance_start" />
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <input type="button" ID="btnSearch" value=" 修 改 "
+                                                   class="btn btn-success col-md-12 " onclick="query()"/>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--查询 按钮-->
+            </div>
 
             <table id = "table" class = "table table-bordered tab-content" >
                 <thead>

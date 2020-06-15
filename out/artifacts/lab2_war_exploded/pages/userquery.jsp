@@ -17,6 +17,9 @@
 
 </head>
 <body>
+<%
+    String name = request.getParameter("username");
+%>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -136,7 +139,7 @@
                             Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
                         </p>
                         <p>
-                            <a class="btn" onclick="book(this)" id ="<%=i*3+j%>" >预定</a>
+                            <a class="btn" onclick="book(this,<%=name%>)" id ="<%=i*3+j%>" >预定</a>
                         </p>
                         <div id="lab<%=i*3+j%>" style="display: none"></div>
                     </div>

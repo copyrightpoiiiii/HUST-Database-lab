@@ -1,5 +1,7 @@
 package servlet;
 
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 import org.Dao.Writer;
 
 import javax.servlet.ServletException;
@@ -7,20 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/BookServlet")
-public class BookServlet extends HttpServlet {
+@WebServlet("/crashServlet")
+public class crashServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookServlet() {
+    public crashServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +34,17 @@ public class BookServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
         Integer id = Integer.valueOf(request.getParameter("id"));
-        String name = request.getParameter("username");
-        Writer new_user = new Writer();
-        int result = new_user.book(id,name);
+        Integer type = Integer.valueOf(request.getParameter("type"));
+        Integer money = Integer.valueOf(request.getParameter("money"));
+        Writer queryCar = new Writer();
+        //ArrayList<JSONObject> array = queryCar.queryCar(1,1,0,3000,"武汉");
+        int result = queryCar.crashWrite(id,type,money);
         PrintWriter out = response.getWriter();
         if (result == 1) {
             out.write("true");
         } else {
-            out.write(result+"");
+            out.write("false");
         }
         out.close();
     }
