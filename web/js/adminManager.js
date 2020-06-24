@@ -134,11 +134,7 @@ $(document).ready(function() {
                 areaCode: $("#areaCode").val()
             };
             return params;
-
         },
-        /*responseHandler: function(res){
-            return res.attributes.Unit;
-        },*/
         columns: [{
             checkbox: true
         }, {

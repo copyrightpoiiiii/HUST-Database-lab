@@ -35,11 +35,6 @@ public class Query {
     }
 
     public int LogIn(String id, String password) {
-        /*
-         * 传入用户的id，password和grade
-         * 如果没有重复id，则注册成功
-         * 返回true时表示注册成功，false表示用户名已存在
-         */
         int userType = -1;
         if (!getConnect()) return -2;
         try {
